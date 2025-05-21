@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="teste00">nome</label><input type="text" name="teste00" id="nome">
+    <label for="senha">senha</label><input type="text" name="senha" id="senha">
+    <input type="button" value="enviar" id = "botao" onclick="enviar()">
+    <script>
+        const valornome = document.getElementById("nome");
+        const valorsenha = document.getElementById("senha");
+        const btn = document.getElementById("botao");
+
+        function enviar(){
+            let valsenha = valorsenha.value;
+            let valnome = valornome.value;
+            localStorage.setItem('senha', valsenha);
+            localStorage.setItem('nome', valnome);
+
+            var valorenv = localStorage.getItem('senha');
+            var valorenv2 = localStorage.getItem('nome');
+
+            
+            alert("nome: "+valorenv2+" senha: "+valorenv);
+
+        }
+
+    </script>
+</body>
+</html>

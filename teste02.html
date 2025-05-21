@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="saida">
+
+    </div>
+    <script>
+        const saida = document.getElementById("saida");
+        valorsaida = localStorage.getItem('nome');
+        valorsaida2 = localStorage.getItem('senha');
+        
+        
+        saida.innerHTML += valorsaida+"<br>";
+        saida.innerHTML += valorsaida2;
+
+    </script>
+</body>
+</html>
