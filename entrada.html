@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="nome">NUMERO  </label><input type="number" name="nome" id="nome">
+    <input type="button" value="enviar dado" onclick="envio()"><br>
+    <input type="button" value="salvar numero" onclick="adicao()">
+
+    
+    <div id="saida"></div>
+
+
+    <script>
+        const saida = document.getElementById("saida");
+        const nome = document.getElementById("nome");
+        
+        function salvarMatriz(matriz, chave) {
+            localStorage.setItem(chave, JSON.stringify(matriz));
+        }
+
+        function recuperarMatriz(chave) {
+            const matrizString = localStorage.getItem(chave);
+            return matrizString ? JSON.parse(matrizString) : null; // Retorna null se não houver
+        }
+
+            // Exemplo de uso
+        
+            let minhaMatriz = [];
+        
+        function adicao(){
+            let valor = nome.value;
+            minhaMatriz.push(valor);
+            
+        }
+        
+
+        
+
+        function envio(){
+            salvarMatriz(minhaMatriz, 'minhaMatriz');
+            let matrizRecuperada = recuperarMatriz('minhaMatriz');
+            let output = saida.innerHTML += matrizRecuperada
+
+        }
+    </script>
+</body>
+</html>
