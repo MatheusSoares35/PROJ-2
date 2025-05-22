@@ -17,13 +17,15 @@
     <script>
         const saida = document.getElementById("saida");
         const nome = document.getElementById("nome");
-        
+
+        //aqui temos um salvamento da matriz: json.stringfy senve para transformar os valores de uma matriz em uma string.
+        //vale a pena lembrar que quando tentei salvar um valor de mais de um digito, acabou salvando cada digito em uma posição diferente
         function salvarMatriz(matriz, chave) {
             localStorage.setItem(chave, JSON.stringify(matriz));
         }
 
         function recuperarMatriz(chave) {
-            const matrizString = localStorage.getItem(chave);
+            const matrizString = localStorage.getItem(chave); //retorna a chave que seria o nome da versão string da matriz
             return matrizString ? JSON.parse(matrizString) : null; // Retorna null se não houver
         }
 
@@ -42,6 +44,8 @@
 
         function envio(){
             salvarMatriz(minhaMatriz, 'minhaMatriz');
+            //matriz recuperada vai dar um output tipo ["numero", ,"numero", "numero"] os digitos de ( [ ) , ( , ) E ( " ) TAMBÉM SÃO POSIÇÕES
+            // eu não sei como concertar isso
             let matrizRecuperada = recuperarMatriz('minhaMatriz');
             let output = saida.innerHTML += matrizRecuperada
 
