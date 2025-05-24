@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logn cliente</title>
+    <style>
+
+        body{
+            width: 100vw;
+            height:100vh;
+            background-color: rgb(55, 189, 247);
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .principal{
+           
+            width:80%;
+            height:80%;
+            background-color: rgb(0, 196, 250);
+            box-shadow: 2px 1px 5px 5px rgb(0, 78, 168);
+            border: 20px solid rgb(30, 44, 155);
+            border-radius:8% 0% 8% 0%;
+            padding: 10px;
+            display:flex;
+            
+            align-items: center;
+            flex-direction: column;
+            
+        }
+        #cabesalho{
+            height:20%;
+            margin-left: 45px auto;
+        }
+        #cabesalho #titulo{
+            width:35%;
+            height: 8%;
+            text-align: center;
+            font-size: 35px;
+            margin-bottom:20px;
+            background-color: rgb(139, 246, 248);
+            border-radius: 10%;
+        }
+        .entrada{
+            height:65%;
+            font-size:30px;
+            display:flex;
+            justify-content: baseline;
+            flex-direction: column;
+        }
+        .campo{
+            width:100%;
+            height:10%;
+            font-size:30px;
+        }
+        .botao{
+            width:200px;
+            height:50px;
+            font-size:30px;
+            background-color: rgb(132, 142, 255);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="principal">
+        <div id="cabesalho"><label id="titulo">LOGIN COMO ATENDENTE</label></div>
+        <div class="entrada">
+            <label for="nome_login">Nome de usuário</label><input type="text" name="NOME" id="nome_login" class="campo">
+            <label for="senha">Senha</label><input type="text" name="SENHA" id="senha_login" class="campo">
+        </div>
+        <div class="painel">
+            <button type="button" class="botao" onclick="entrar()">ENTRAR</button>
+            <button type="button" class="botao">voltar</button>
+        </div>
+    </div>
+
+
+    <script>
+        const nomeLogin = document.getElementById("nome_login");
+        const senhaLogin = document.getElementById("senha_login");
+
+        
+        function entrar(){
+            sessionStorage.setItem("senhadef",senhaLogin.value);
+            sessionStorage.setItem("nomedef",nomeLogin.value);
+
+            let senhadef = sessionStorage.getItem("senhadef");
+            let nomedef = sessionStorage.getItem("nomedef");
+            alert("nome: "+senhadef+", senha: "+nomedef);
+        }
+
+        
+
+        
+    </script>
+</body>
+</html>
