@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1>Tabela de dados do usuario</h1>
+    <table>
+    <tr class="c1">
+     <th colspan="5">Tabela de Usuario</th>
+    </tr>
+<tr class="c2">
+<th>CPF</th>
+<th>USUARIO</th>
+<th>NOME</th>
+<th>User type</th>
+<th>SENHA</th>
+
+</tr>
+<tr>
+
+
+
+</tr>
+
+
+
+
+
+
+    </table>
+<script>
+  window.onload = function () {
+    const tabela = document.querySelector("table");
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    usuarios.forEach(user => {
+      const linha = document.createElement("tr");
+      linha.classList.add("c3");
+      linha.innerHTML = `
+        <td>${user.cpf}</td>
+        <td>${user.usuario}</td>
+        <td>${user.nome}</td>
+        <td>${user.tipo}</td>
+        <td>${user.senha}</td>
+        
+      `;
+      tabela.appendChild(linha);
+    });
+  };
+
+
+
+
+
+
+
+
+
+</script>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        table{
+            width: 40%;
+            margin:0 auto;
+            border-collapse: collapse;
+        }
+        th,td{
+            border:1px solid hsl(0,0%,70%);
+        }
+        .valor{
+            text-align: right;
+        }
+        h1{
+            text-align: center;
+        }
+        :root{
+            --cor:240;
+        }
+        .c1{
+            background: hsl(var(--cor),100%,50%);
+        }
+        .c2{
+            background: hsl(var(--cor),100%,70%);
+        }
+        .c3{
+            background: hsl(var(--cor),100%,90%);
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>

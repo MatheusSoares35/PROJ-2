@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efetur login como entregador</title>
+    <style>
+
+        body{
+            width: 100vw;
+            height:100vh;
+            background-color: rgb(55, 247, 55);
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .principal{
+           
+            width:80%;
+            height:80%;
+            background-color: rgb(0, 250, 17);
+            box-shadow: 2px 1px 5px 5px rgb(76, 168, 0);
+            border: 20px solid rgb(181, 255, 101);
+            border-radius:8% 0% 8% 0%;
+            padding: 10px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+        .principal #titulo{
+            width:35%;
+            height: 8%;
+            text-align: center;
+            font-size: 130%;
+            margin-bottom:20px;
+            background-color: rgb(174, 248, 139);
+            border-radius: 10%;
+        }
+        .entrada{
+            height:65%;
+            font-size:30px;
+            display:flex;
+            justify-content: baseline;
+            flex-direction: column;
+        }
+        .campo{
+            width:100%;
+            height:10%;
+            font-size:30px;
+        }
+        .botao{
+            width:200px;
+            height:50px;
+            font-size:100%;
+            background-color: rgb(134, 255, 132);
+        }
+
+    </style>
+</head>
+<body>
+    <body>
+    <div class="principal">
+        <div id="titulo">login como entregador</div>
+        <div class="entrada">
+            <label for="nome_login">Nome de usuário</label><input type="text" name="NOME" id="nome_login" class="campo">
+            <label for="senha">Senha</label><input type="text" name="SENHA" id="senha_jogin" class="campo">
+            <label for="senha">CPF</label><input type="text" name="CPF" id="cpf_login" class="campo">
+        </div>
+        <div class="painel">
+            <button type="button" class="botao">ENTRAR</button>
+            <button type="button" class="botao">voltar</button>
+        </div>
+    </div>
+    <script>
+    function entrar() {
+        const nomeDigitado = document.getElementById("nome_login").value;
+        const senhaDigitada = document.getElementById("senha_jogin").value;
+        const cpfDigitado = document.getElementById("cpf_login").value;
+
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+        // Verifica se existe algum usuário com os dados informados
+        const usuarioEncontrado = usuarios.find(user =>
+            user.usuario === nomeDigitado &&
+            user.senha === senhaDigitada &&
+            user.cpf === cpfDigitado &&
+            user.tipo === "entregador"
+        );
+
+        if (usuarioEncontrado) {
+            alert("Login realizado com sucesso!");
+            // Redirecionar, por exemplo:
+            // window.location.href = "pagina_entregador.html";
+        } else {
+            alert("Usuário ou senha inválidos, ou não é um entregador.");
+        }
+    }
+
+    // Liga o botão à função entrar
+    document.querySelector('.botao').addEventListener('click', entrar);
+</script>
+
+</body>
+</html>
