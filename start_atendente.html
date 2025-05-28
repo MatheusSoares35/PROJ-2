@@ -12,16 +12,21 @@
         }
         .btntop{
             width:100vw;
-            height:20vh;
+            height:16vh;
             background-color: blueviolet;
+            display: flex;
+            flex-direction: row;
         }
         #painel{
-            width: 50%;
+            width: 70%;
             height: 100%;
             background-color: brown;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
         }
         .botao{
-            width:20%;
+            width:18%;
             height:40%;
             background-color: rgba(165, 42, 42, 0);
             
@@ -29,7 +34,17 @@
         .botao:hover{
             background-color: rgba(155, 155, 155, 0.187);
         }
-        
+        #entregas{
+            padding:10px;
+        }
+        .prompt{
+            width:100vw;
+            height:84vh;
+            background-color:burlywood;
+        }
+        #entregadores{
+            width:70%;
+        }
     </style>
 
 </head>
@@ -39,16 +54,44 @@
         <div id="painel">
             <button class="botao" >VOLTAR </button>
             <button class="botao" >PÁGINA INICIAL</button>
-            <button class="botao" >CARDAPIO DO DIA</button>
-            <button class="botao" >MEUS PEDIDOS</button>
+            <button class="botao" >Designar pedido</button>
+            <button class="botao" >Cadastrar pedido</button>
             <button class="botao" >SAIR</button>
         </div>
+        <div id="entregas">
+            <label for="entregadores">entregadores disponíveis</label>
+            <select name="entregadores" id="entregadores"> 
+                <option value="nenhum">nenhum entregador disponível</option>    
+            </select>
+            
+
+            
+        </div>
+
+    </div>
+        <div class="prompt">
+
     </div>
 
 
     <script>
+        const entregadores = document.getElementById("entregadores");
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
         
-
+        usuarios.forEach((user) => {
+            if (user.tipo === "entregador") {
+                const option = document.createElement("option");
+                option.value = user.usuario; // ou user.nome, se preferir mostrar nomes
+                option.textContent = user.usuario;
+                entregadores.appendChild(option);
+            }
+        });
+        if (entregadores.children.length > 1) {
+            entregadores.removeChild(entregadores.firstElementChild);
+        }
+        function sair(){
+            window.location = "";
+        }
     </script>
 </body>
 </html>
