@@ -55,12 +55,12 @@
             <button class="botao" >VOLTAR </button>
             <button class="botao" >PÁGINA INICIAL</button>
             <button class="botao" >Designar pedido</button>
-            <button class="botao" >Cadastrar pedido</button>
+            <button class="botao" > Mostrar dados </button>
             <button class="botao" >SAIR</button>
         </div>
         <div id="entregas">
             <label for="entregadores">entregadores disponíveis</label>
-            <select name="entregadores" id="entregadores"> 
+            <select name="entregadores" id="entregadores">
                 <option value="nenhum">nenhum entregador disponível</option>    
             </select>
             
@@ -77,21 +77,26 @@
     <script>
         const entregadores = document.getElementById("entregadores");
         const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        console.log(usuarios);
         
         usuarios.forEach((user) => {
             if (user.tipo === "entregador") {
+                console.log(user);
+                user.status = "disponivel";
+                
                 const option = document.createElement("option");
                 option.value = user.usuario; // ou user.nome, se preferir mostrar nomes
                 option.textContent = user.usuario;
                 entregadores.appendChild(option);
             }
         });
+
+
         if (entregadores.children.length > 1) {
             entregadores.removeChild(entregadores.firstElementChild);
         }
-        function sair(){
-            window.location = "";
-        }
+    
     </script>
+    <script src="teste.js"></script>
 </body>
 </html>
