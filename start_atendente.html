@@ -117,11 +117,9 @@
             usuarios.forEach((user) => {
             if (user.tipo === "entregador") {
                 if(user.status === "disponivel"){
-                    prompt.innerHTML += `<p class = 'dado'>
-                        <b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:green;'>${user.status}</span></p><br>`
+                    prompt.innerHTML += `<p class = 'dado'><b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:green;'>${user.status}</span></p><br>`
                 }else{
-                    prompt.innerHTML += `<p class = 'dado'>
-                        <b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:red;'>${user.status}</span></p><br>`
+                    prompt.innerHTML += `<p class = 'dado'><b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:red;'>${user.status}</span></p><br>`
                 }
                 
             }
