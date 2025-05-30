@@ -5,19 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    body{
+        width:100vw;
+        height:100vh;
+        background-color: darkkhaki;
+    }
+    #botao{
+        width:200px;
+        height:20px;
+        display: inline;
+        color:red;
+    }
+</style>
 <body>
     <div id="saida">
+    <button id="botao">
+        scekf
+    </button>
 
     </div>
-    <script>
-        const saida = document.getElementById("saida");
-        valorsaida = localStorage.getItem('nome');
-        valorsaida2 = localStorage.getItem('senha');
-        
-        
-        saida.innerHTML += valorsaida+"<br>";
-        saida.innerHTML += valorsaida2;
+    <script src="teste.js"></script>
 
-    </script>
+    <script>
+  window.onload = function() {
+    const botao = document.getElementById("botao");
+    //botao.style.display = "none";
+  }
+</script>
 </body>
 </html>

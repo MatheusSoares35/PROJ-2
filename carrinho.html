@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrinho - Pizzaria Papalégua</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+    }
+
+    
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      color: #e67e22;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+  #formasPagamento {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .forma-pagamento {
+      margin: 5px 0;
+    }
+
+    li {
+      background: white;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .remove-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 10px;
+      color: green;
+    }
+
+    .clear-btn {
+      background-color: darkred;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Seu Carrinho</h1>
+
+  <h2>Pizzas</h2>
+  <ul id="lista-pizzas"></ul>
+  <p class="total" id="total-pizzas"></p>
+
+  <h2>Bebidas</h2>
+  <ul id="lista-bebidas"></ul>
+  <p class="total" id="total-bebidas"></p>
+
+  <p class="total" id="total-geral"></p>
+
+  <button class="clear-btn" onclick="esvaziarCarrinho()">Esvaziar Carrinho</button>
+  <button onclick="mostrarFormasPagamento()">Pagamento</button>
+
+  <div id="formasPagamento">
+    <h3>Escolha a forma de pagamento:</h3>
+
+    <div class="forma-pagamento">
+      <input type="radio" name="pagamento" value="pix"> Pix
+<details><summary>Aprovação Imediata</summary><p>Aprovado automaticamente via PIX.</p></details>
+    </div>
+
+    <div class="forma-pagamento">
+      <input type="radio" name="pagamento" value="credito"> Crédito
+<details><summary>Sujeito a cobrança</summary><p>Cartão de crédito pode ter taxas adicionais.</p></details>
+    </div>
+
+    <div class="forma-pagamento">
+      <input type="radio" name="pagamento" value="debito"> Débito
+    </div>
+  </div>
+  
+  <button onclick="finalizarCompra()">Finalizar Compra</button>
+
+  <button onclick="window.location.href='cardapio.html'">← Voltar ao Cardápio</button>
+
+  
+     
+    
+    
+    
+  </div>
+
+  <script>
+    let pizzas = JSON.parse(localStorage.getItem('carrinhoPizzas')) || [];
+    let bebidas = JSON.parse(localStorage.getItem('carrinhoBebidas')) || [];
+
+    const listaPizzas = document.getElementById('lista-pizzas');
+    const listaBebidas = document.getElementById('lista-bebidas');
+    const totalPizzas = document.getElementById('total-pizzas');
+    const totalBebidas = document.getElementById('total-bebidas');
+    const totalGeral = document.getElementById('total-geral');
+
+    function renderizarCarrinho() {
+      listaPizzas.innerHTML = '';
+      listaBebidas.innerHTML = '';
+
+      let totalPizzaValor = 0;
+      let totalBebidaValor = 0;
+
+      pizzas.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)}
+          <button class="remove-btn" onclick="removerItem('pizza', ${index})">Remover</button>`;
+        listaPizzas.appendChild(li);
+        totalPizzaValor += item.preco;
+      });
+
+      bebidas.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)}
+          <button class="remove-btn" onclick="removerItem('bebida', ${index})">Remover</button>`;
+        listaBebidas.appendChild(li);
+        totalBebidaValor += item.preco;
+      });
+
+      totalPizzas.textContent = `Total de Pizzas: R$ ${totalPizzaValor.toFixed(2)}`;
+      totalBebidas.textContent = `Total de Bebidas: R$ ${totalBebidaValor.toFixed(2)}`;
+      totalGeral.textContent = `Total Geral: R$ ${(totalPizzaValor + totalBebidaValor).toFixed(2)}`;
+    }
+
+    function mostrarFormasPagamento() {
+      const divFormas = document.getElementById("formasPagamento");
+      divFormas.style.display = "block";
+    }
+  
+ 
+  function finalizarCompra() {
+  const formaSelecionada = document.querySelector('input[name="pagamento"]:checked');
+
+  if (!formaSelecionada) {
+    alert("Por favor, selecione uma forma de pagamento.");
+    return;
+  }
+
+  // Calcular total
+  const totalPizzasValor = pizzas.reduce((acc, item) => acc + item.preco, 0);
+  const totalBebidasValor = bebidas.reduce((acc, item) => acc + item.preco, 0);
+  const totalGeral = totalPizzasValor + totalBebidasValor;
+
+  // Criar objeto Pedido
+  const pedido = {
+    data: new Date().toISOString(),
+    itens: {
+      pizzas: pizzas,
+      bebidas: bebidas
+    },
+    pagamento: formaSelecionada.value,
+    total: totalGeral
+  };
+
+  console.log("Pedido finalizado:", pedido); // Você pode salvar ou enviar isso via API
+  alert(`Pedido realizado com sucesso via ${formaSelecionada.value}!`);
+
+  // Recupera lista de pedidos existentes (se houver)
+const pedidosExistentes = JSON.parse(localStorage.getItem("pedidosRecebidos")) || [];
+
+// Adiciona o novo pedido à lista
+pedidosExistentes.push(pedido);
+
+// Salva no localStorage
+localStorage.setItem("pedidosRecebidos", JSON.stringify(pedidosExistentes));
+
+
+
+
+  // Exemplo: salvar no localStorage ou enviar para um backend futuramente
+  // localStorage.setItem("pedidoFinalizado", JSON.stringify(pedido));
+
+  // Limpar carrinho
+  esvaziarCarrinho();
+  document.getElementById("formasPagamento").style.display = "none";
+  document.querySelectorAll('input[name="pagamento"]').forEach(el => el.checked = false);
+}
+
+ 
+
+
+  function removerItem(tipo, index) {
+      if (tipo === 'pizza') {
+        pizzas.splice(index, 1);
+        localStorage.setItem('carrinhoPizzas', JSON.stringify(pizzas));
+      } else if (tipo === 'bebida') {
+        bebidas.splice(index, 1);
+        localStorage.setItem('carrinhoBebidas', JSON.stringify(bebidas));
+      }
+      renderizarCarrinho();
+    }
+
+    function esvaziarCarrinho() {
+      localStorage.removeItem('carrinhoPizzas');
+      localStorage.removeItem('carrinhoBebidas');
+      pizzas = [];
+      bebidas = [];
+      renderizarCarrinho();
+      
+    }
+
+    function esvaziarCarrinho() {
+  if (!confirm("Tem certeza que deseja esvaziar o carrinho?")) return;
+  localStorage.removeItem('carrinhoPizzas');
+  localStorage.removeItem('carrinhoBebidas');
+  pizzas = [];
+  bebidas = [];
+  renderizarCarrinho();
+}
+
+    renderizarCarrinho();
+  </script>
+  
+
+</body>
+</html>

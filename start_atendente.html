@@ -13,14 +13,14 @@
         .btntop{
             width:100vw;
             height:16vh;
-            background-color: blueviolet;
+            background-color: rgb(56, 55, 57);
             display: flex;
             flex-direction: row;
         }
         #painel{
             width: 70%;
             height: 100%;
-            background-color: brown;
+            background-color: rgba(0, 0, 0, 0);
             display: flex;
             align-items: center;
             justify-content: space-evenly;
@@ -28,19 +28,27 @@
         .botao{
             width:18%;
             height:40%;
-            background-color: rgba(165, 42, 42, 0);
+            background-color: rgb(156, 0, 0);
             
         }
         .botao:hover{
-            background-color: rgba(155, 155, 155, 0.187);
+            background-color: rgba(208, 208, 208, 0.187);
         }
         #entregas{
             padding:10px;
         }
-        .prompt{
+        .visu{
             width:100vw;
             height:84vh;
-            background-color:burlywood;
+             background-image: linear-gradient(to right,rgb(62, 62, 62), rgb(78, 0, 0));
+            display: flex;
+            flex-direction: row;
+            
+        }
+        .prompt{
+            width:50%;
+            height:100%;
+            background-color: rgba(0, 0, 0, 0);
             padding: 20px;
         }
         #entregadores{
@@ -48,9 +56,9 @@
         }
         .dado{
             background-color: darkkhaki;
-            box-shadow:5px 5px 1px rgb(129, 125, 69);
+            box-shadow:2px 2px 5px rgb(129, 125, 69);
             display: inline-flex;
-            width:50%;
+            width:100%;
             height:40px;
             margin-top: 15px;
             border: 1px solid black;
@@ -59,6 +67,13 @@
         }
         .dado:hover{
             background-color: rgb(227, 220, 128);
+
+        }
+        #console{
+            background-color: rgba(0, 0, 0, 0);
+            width:50%;
+            height:100%;
+            padding:20px;
 
         }
             </style>
@@ -71,7 +86,7 @@
             <button class="botao" onclick="voltarLogin1()">VOLTAR </button>
             <button class="botao" >PÁGINA INICIAL</button>
             <button class="botao" >Designar pedido</button>
-            <button class="botao" onclick="carregarDados()"> Carregar dados </button>
+            <button class="botao" onclick="carregarDados()"> Mostrar dados </button>
             <button class="botao" >SAIR</button>
         </div>
         <div id="entregas">
@@ -86,30 +101,76 @@
         </div>
 
     </div>
-    <div class="prompt" id="display">
-
-    </div>
-    <div class="console">
-
+    <div class="visu">
+        <div class="prompt" id="display"></div>
+        <div id="console"></div>
     </div>
 
     <script src="scriptlocate.js"></script>
-    <script>
-        const entregadores = document.getElementById("entregadores");
+<script>
+const entregadores = document.getElementById("entregadores");
         const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
         console.log(usuarios);
+const pedidos = JSON.parse(localStorage.getItem("pedidosRecebidos")) || [];
+
+
+function renderizarPedidos() {
+    const promptArea = document.getElementById("console");
+  if (pedidos.length === 0) {
+    promptArea.innerHTML = "<h2>Nenhum pedido recebido.</h2>";
+    return;
+  }
+  
+  promptArea.innerHTML = "<h2>Pedidos Recebidos:</h2>";
+
+  pedidos.forEach((pedido, index) => {
+    const div = document.createElement("div");
+    div.classname = ""
+    div.style.border = "1px solid black";
+    div.style.padding = "10px";
+    div.style.margin = "10px";
+    div.style.backgroundcolor=  "darkkhaki";
+    div.style.boxshadow="2px 2px 5px rgb(129, 125, 69)";
+    div.addEventListener('mouseover', () => {
+        div.style.backgroundcolor= "rgb(227, 220, 128)";
+        div.style.boxshadow="2px 2px 5px rgb(129, 125, 69)";
+    });
+    div.addEventListener('mouseout', () => {
+        div.style.backgroundcolor=  "darkkhaki";
+        div.style.boxshadow="2px 2px 5px rgb(129, 125, 69)";
+    });
+
+    let html = `
+      <p><strong>Data:</strong> ${new Date(pedido.data).toLocaleString()}</p>
+      <p><strong>Pagamento:</strong> ${pedido.pagamento}</p>
+      <p><strong>Total:</strong> R$ ${pedido.total.toFixed(2)}</p>
+      <p><strong>Pizzas:</strong></p>
+      <ul>${pedido.itens.pizzas.map(p => `<li>${p.nome} - R$ ${p.preco.toFixed(2)}</li>`).join('')}</ul>
+      <p><strong>Bebidas:</strong></p>
+      <ul>${pedido.itens.bebidas.map(b => `<li>${b.nome} - R$ ${b.preco.toFixed(2)}</li>`).join('')}</ul>
+    `;
+
+    div.innerHTML = html;
+    promptArea.appendChild(div);
+  });
+}
+
+
+
+
         
-        usuarios.forEach((user) => {
-            if (user.tipo === "entregador") {
-                console.log(user);
-                user.status = "disponivel";
+        
+usuarios.forEach((user) => {
+    if (user.tipo === "entregador") {
+            console.log(user);
+            user.status = "disponivel";
                 
-                const option = document.createElement("option");
-                option.value = user.usuario; // ou user.nome, se preferir mostrar nomes
-                option.textContent = user.usuario;
-                entregadores.appendChild(option);
-            }
-        });
+            const option = document.createElement("option");
+            option.value = user.usuario; // ou user.nome, se preferir mostrar nomes
+            option.textContent = user.usuario;
+            entregadores.appendChild(option);
+        }
+    });
 
         function carregarDados(){
             const prompt = document.getElementById("display");
@@ -117,16 +178,26 @@
             usuarios.forEach((user) => {
             if (user.tipo === "entregador") {
                 if(user.status === "disponivel"){
-                    prompt.innerHTML += `<p class = 'dado'><b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:green;'>${user.status}</span></p><br>`
+                    prompt.innerHTML += `<p class = 'dado'>
+                        <b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:green;'>${user.status}</span></p><br>`
                 }else{
-                    prompt.innerHTML += `<p class = 'dado'><b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:red;'>${user.status}</span></p><br>`
+                    prompt.innerHTML += `<p class = 'dado'>
+                        <b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:red;'>${user.status}</span></p><br>`
                 }
                 
             }
+            
         });
+            renderizarPedidos();
         }
 
+const dados = [...document.getElementsByClassName("dado")];
 
+dados.forEach((dado) => {
+    dado.addEventListener("click", () => {
+        alert("Cliquei em um dado");
+    });
+});
 
 
 

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Papalégua</title>
+</head>
+    <body>
+        <main>
+            <section id="cardapio">
+                <header>
+                    <h2 class="titulo-cardapio">Cardápio Pizzaria Papalégua</h2>
+                    <button onclick="window.location.href='index.html'">Home</button>
+                    <button onclick="window.location.href='carrinho.html'">🛒Ver Carrinho</button>
+                    
+                  </header>
+                <style>
+                    body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f8f8f8;
+          color: #333;
+        }
+
+.add-to-cart{
+  background-color: yellow;
+color: darkmagenta;
+border: none;
+padding: 8px 15px;
+border-radius: 5px;
+cursor: pointer;
+
+}
+
+        header {
+          background-color: #000;
+          color: #fff;
+          padding: 20px 0;
+          text-align: center;
+        }
+
+        header button{
+          background-color: #000;
+          border: none;
+          color: #fff;
+          padding: 20px 0;
+          text-align: center;
+        }
+
+        h1 {
+          margin: 0;
+          font-size: 36px;
+        }
+
+        .menu {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+          padding: 40px;
+          max-inline-size: 1200px;
+          margin: auto;
+        }
+
+        .pizza {
+          background-color: #fff;
+          border-radius: 10px;
+          color: #e67e22;
+          overflow: hidden;
+          transition: transform 0.2s;
+        }
+
+        .pizza:hover {
+          transform: scale(1.03);
+        }
+
+        .pizza img {
+          inline-size: 100%;
+          block-size: 250px;
+          object-fit: cover;
+        }
+
+        .pizza-content {
+          padding: 20px;
+          text-align: center;
+        }
+
+        .pizza h2 {
+          margin-block-start: 0;
+          font-size: 24px;
+          color: #000;
+        }
+
+        .pizza p {
+          margin: 10px 0;
+        }
+
+        .price {
+          font-weight: bold;
+          color: chartreuse;
+          font-size: 18px;
+        }
+                    body { font-family: Arial, sans-serif; margin: 0; background-color: #f8f8f8; }
+                    header { background-color: #222; color: white; text-align: center; padding: 2rem 0; }
+                    h1 { margin: 0; font-size: 2.5rem; }
+                    .cardapio { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 2rem; }
+                    .pizza { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+                    .pizza img { inline-size: 100%; block-size: 200px; object-fit: cover; }
+                    .pizza h2 { margin: 0.5rem 0; font-size: 1.3rem; }
+                    .pizza p { margin: 0.5rem 1rem; font-size: 0.95rem; color: #555; }
+                    .pizza .preco { font-weight: bold; color: #e67e22; margin: 0.5rem 0 1rem; }
+                  </style>
+</section>
+
+
+                    
+                    
+                </div>
+                <div id="itens-cardapio">
+                    </div>
+                </section>
+                <script src="index2.js"></script>
+               
+            </section>
+                    <section class="cardapio">
+                <div class="menu">
+                    <div class="pizza">
+                        <div class="pizza-content"></div>
+                <ol class="itens-cardapio">
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza">Pizza de Queijo: </h2>
+                        <img class="nome-da-pizza1" src="pizza queijo.jpg" height="350" width="150">
+                        <p class="price">R$36.90</p>
+                        <button onclick="adicionarAoCarrinho('Pizza de Queijo', 36.90, 'pizza')">Adicionar ao Carrinho</button>
+                        <ol>
+                             <li>Molho de tomate</li>
+                             <li>Mussarela</li>
+         
+                        </ol>
+                      <br> <!-- trocar a quebra de linha para px -->
+                    </li>
+                    </ol>
+                    </div>
+                
+                    <div class="menu">
+                    <div class="pizza">
+                        <div class="pizza-content"></div>
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza3">Pizza de Sensação: </h2>
+                        <img src="pizza_sensacao.jpg">
+                        <p class="price">R$36.90</p>
+                        <button onclick="adicionarAoCarrinho('Pizza de Sensação', 36.90, 'pizza')">Adicionar ao Carrinho</button>
+                        <ol>
+                             <li>Chocolate ao Leite,Granulado e Morango.</li>
+         
+                        </ol>
+                      <br> <!-- trocar a quebra de linha para px -->
+                    </li>
+                </div>
+            </div>
+
+
+                    <div class="menu">
+                    <div class="pizza">
+                    <div class="pizza-content"></div>
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza4">Pizza de Margherita: </h2>
+                        <img src="pizza de margherita.jpg" alt="" width="350" height="330">
+                        <p class="price">R$36.90</p>
+                        <button onclick="adicionarAoCarrinho('Pizza de Margherita', 36.90, 'pizza')">Adicionar ao Carrinho</button>
+                        <ol>
+                             <li>Molho de tomate (geralmente um molho de tomate fresco e temperado)</li>
+                             <li>Mussarela de búfala (ou mussarela comum)</li>
+        
+                        </ol>
+                      <br> <!-- trocar a quebra de linha para px -->
+                    </li>
+                </div>
+            </div>
+
+
+
+                   <div class="menu">
+                    <div class="pizza">
+                        <div class="pizza-content"></div>
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza5">Pizza de Pepperoni: </h2>
+                        <img src="pizza de pepperoni.jpg" width="350" height="330">
+                        <p class="price">R$36.90</p>
+                        <button onclick="adicionarAoCarrinho('Pizza de Pepperoni', 36.90, 'pizza')">Adicionar ao Carrinho</button>
+                        <ol>
+                             <li>Queijos: Cheddar, gorgonzola, ricota.</li>
+                             <li>Carnes: Pepperoni, carne moída, atum.</li>
+                        
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+
+        <div class="menu">
+                    <div class="pizza">
+                        <div class="pizza-content"></div>
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza5">Pizza de Brocolis: </h2>
+                        <img src="pizza_brocolis.jpg" width="350" height="330">
+                        <p class="price">R$36.90</p>
+                        <button onclick="adicionarAoCarrinho('Pizza de Brócolis', 36.90, 'pizza')">Adicionar ao Carrinho</button>
+                        <ol>
+                             <li>Queijos e Brocolis.</li>
+                             
+                        
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+<div class="menu">
+                    <div class="pizza">
+                        <div class="pizza-content"></div>
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza5">Pizza de Frango Com Catupiry: </h2>
+                        <img src="pizza_frango.jpg" width="350" height="330">
+                        <p class="price">R$36.90</p>
+                        <button onclick="adicionarAoCarrinho('Pizza de Frango com Catupiry', 36.90, 'pizza')">Adicionar ao Carrinho</button>
+                        <ol>
+                             <li>Frango e Catupiry.</li>
+                             
+                        
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="pizza">
+                        <div class="pizza-content"></div>
+                    <li class="item-cardapio">
+                        <h2 class="nome-da-pizza5">Refrigerante Coca Cola: </h2>
+                        <img src="Refrigerante Coca-Cola.jpg" width="350" height="330">
+                        <p class="price">R$19,90</p>
+                        <button onclick="adicionarAoCarrinho('Refrigerante Coca-Cola', 19.90, 'bebida')">Adicionar ao Carrinho</button>
+                        <ol>
+                           
+                             
+                        
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+<script>
+let carrinhoPizzas = JSON.parse(localStorage.getItem('carrinhoPizzas')) || [];
+let carrinhoBebidas = JSON.parse(localStorage.getItem('carrinhoBebidas')) || [];
+
+function adicionarAoCarrinho(nome, preco, tipo){
+  const item = { nome, preco };
+
+  if(tipo === 'pizza') {
+    carrinhoPizzas.push(item);
+    localStorage.setItem('carrinhoPizzas', JSON.stringify(carrinhoPizzas));
+  } else if(tipo === 'bebida') {
+    carrinhoBebidas.push(item);
+    localStorage.setItem('carrinhoBebidas', JSON.stringify(carrinhoBebidas));
+  }
+
+  alert(`${nome} foi adicionado ao carrinho de ${tipo}s!`);
+}
+
+
+    
+
+</script>
+
+            <section id="tempo-entrega">
+                <p></p>
+                <p></p>
+</section>
+                    </section>
+<hr>
+
+
+
+
+</hr>
