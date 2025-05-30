@@ -41,21 +41,37 @@
             width:100vw;
             height:84vh;
             background-color:burlywood;
+            padding: 20px;
         }
         #entregadores{
             width:70%;
         }
-    </style>
+        .dado{
+            background-color: darkkhaki;
+            box-shadow:5px 5px 1px rgb(129, 125, 69);
+            display: inline-flex;
+            width:50%;
+            height:40px;
+            margin-top: 15px;
+            border: 1px solid black;
+            align-items: center;
+            padding:3px;
+        }
+        .dado:hover{
+            background-color: rgb(227, 220, 128);
+
+        }
+            </style>
 
 </head>
 <body>
     <div class="btntop">
         
         <div id="painel">
-            <button class="botao" >VOLTAR </button>
+            <button class="botao" onclick="voltarLogin1()">VOLTAR </button>
             <button class="botao" >PÁGINA INICIAL</button>
             <button class="botao" >Designar pedido</button>
-            <button class="botao" > Mostrar dados </button>
+            <button class="botao" onclick="carregarDados()"> Carregar dados </button>
             <button class="botao" >SAIR</button>
         </div>
         <div id="entregas">
@@ -63,17 +79,21 @@
             <select name="entregadores" id="entregadores">
                 <option value="nenhum">nenhum entregador disponível</option>    
             </select>
+
             
 
             
         </div>
 
     </div>
-        <div class="prompt">
+    <div class="prompt" id="display">
+
+    </div>
+    <div class="console">
 
     </div>
 
-
+    <script src="scriptlocate.js"></script>
     <script>
         const entregadores = document.getElementById("entregadores");
         const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -91,12 +111,30 @@
             }
         });
 
+        function carregarDados(){
+            const prompt = document.getElementById("display");
+            prompt.innerHTML = "";
+            usuarios.forEach((user) => {
+            if (user.tipo === "entregador") {
+                if(user.status === "disponivel"){
+                    prompt.innerHTML += `<p class = 'dado'><b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:green;'>${user.status}</span></p><br>`
+                }else{
+                    prompt.innerHTML += `<p class = 'dado'><b>${user.usuario}</b>, nome do entregador:<b>${user.nome}</b>, status: <span style = 'color:red;'>${user.status}</span></p><br>`
+                }
+                
+            }
+        });
+        }
+
+
+
+
 
         if (entregadores.children.length > 1) {
             entregadores.removeChild(entregadores.firstElementChild);
         }
     
     </script>
-    <script src="teste.js"></script>
+    
 </body>
 </html>
